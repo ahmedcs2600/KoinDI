@@ -1,0 +1,81 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'koin'
+android {
+    compileSdkVersion 30
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.app.koindi"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    //Support Libraries
+    implementation "androidx.core:core-ktx:$core_ktx"
+    implementation "androidx.appcompat:appcompat:$app_compat"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout"
+    implementation "androidx.recyclerview:recyclerview:$recycler_view"
+
+    //Di Koin
+    implementation "org.koin:koin-android:$koin_version"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version" // Koin AndroidX ViewModel features
+
+    //Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+
+    // networking
+    api "com.squareup.retrofit2:retrofit:$retrofit_version"
+    api "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor"
+    implementation "com.google.code.gson:gson:$gson_version"
+    implementation "com.squareup.okhttp3:okhttp:$ok_http"
+
+    //image caching
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+
+
+    //Navigation Testing
+    androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
+    debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
+
+    //Testing
+    testImplementation "com.squareup.okhttp3:mockwebserver:4.9.0"
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$ext_junit"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core"
+
+}
